@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.shop.order.OrderDAO">
+	
+	<delete id="setOrderDelete" parameterType="OrderDTO">
+		delete from ordersum where num=#{num}
+	</delete>
+	
+	<select id="getOrderOne" parameterType="OrderDTO" resultType="OrderDTO">
+		select * from ordersum where num=#{num}
+	</select>
+	
+	<update id="setOrderAddressSequenceUpdate" parameterType="OrderDTO">
+		update dest set num=dest_seq.nextval where num=#{num}
+	</update>
+	
+	<delete id="setOrderAddressFixDelete" parameterType="OrderDTO">	
+		delete from dest where num=
+		(select min(num)
+		 from dest
+		 where memberId=#{memberId} and fix=0
+		)
+	</delete>
+	<select id="getOrderAddressCount" resultType="Long" parameterType="OrderDTO">
+		select count(num) from dest where memberId=#{memberId}
+	</select>
+
+	<update id="setOrderAddressFixUpdate" parameterType="OrderDTO">
+		update dest set fix=#{fix} where num=#{num}
+	</update>
+	
+	<select id="getOrderAddressOne" parameterType="OrderDTO" resultType="OrderDTO">
+		select * from dest where num=#{num}
+	</select>
+	
+	<update id="setOrderAddressUpdate" parameterType="OrderDTO">
+		update dest set takeperson=#{takePerson},takephone=#{takePhone},takeaddr1=#{takeAddr1} ,takeaddr2=#{takeAddr2},
+		takeaddr3=#{takeAddr3} where num=#{num}
+	</update>
+	
+	<delete id="setOrderAddressDelete" parameterType="OrderDTO">
+		delete from dest where num=#{num}
+	</delete>
+
+	<select id="getOrderAddressCheck" parameterType="OrderDTO" resultType="OrderDTO">
+		select * from dest where memberid=#{memberId} and  takeperson=#{takePerson} and
+		takephone=#{takePhone} and takeaddr1=#{takeAddr1} and takeaddr2=#{takeAddr2} and
+		 takeaddr3=#{takeAddr3}
+	</select>
+	<select id="getOrderAddress" parameterType="OrderDTO" resultType="OrderDTO">
+		select *
+		from dest where memberid=#{memberId} order by num desc
+	</select>
+	<update id="setOrderStatusUpdate" parameterType="OrderDTO">
+		update ordersum  set status=#{status} where num=#{num}
+	</update>
+
+	<select id="getOne" parameterType="CartDTO" resultMap="getListResult">
+		select c.*,p.*
+		from cart c inner join product p
+		on(c.productNum=p.num)
+		where c.num=#{num}
+		order by c.num desc
+	
+	</select>
+	
+	<resultMap type="CartDTO" id="getListResult">
+		<id column="num" property="num"/>
+		<result column="memberId" property="memberId"/>
+		<result column="productNum" property="productNum"/>
+		<result column="color" property="color"/>
+		<result column="sizing" property="sizing"/>
+		<result column="amount" property="amount"/>
+		<result column="regDate" property="regDate"/>
+		<result column="productNum" property="productNum"/>
+		
+		<association property="productDTO" javaType="ProductDTO">
+			<result column="num" property="num"/>
+			<result column="name" property="name"/>
+			<result column="price" property="price"/>
+			<result column="sale" property="sale"/>
+			<result column="imgName" property="imgName"/>
+		</association>
+	</resultMap>
+	
+	<insert id="setOrderInsert" parameterType="OrderDTO">
+		insert into ordersum values(#{num},#{memberId},#{takePerson},#{takePhone},#{takeAddr1},
+		#{takeAddr2},#{takeAddr3},#{totalPrice},#{point},'결제완료',sysdate)
+		
+	</insert>
+	
+	<insert id="setDestInsert" parameterType="OrderDTO">
+		insert into dest values(dest_seq.nextval,#{memberId},#{takePerson},#{takePhone},#{takeAddr1},#{takeAddr2},#{takeAddr3},0)
+	</insert>
+	
+	<insert id="setOrderDetailInsert" parameterType="OrderDetailDTO">
+		insert into orderdetail values(orderdetail_seq.nextval,#{orderNum},#{productNum},#{color},#{sizing},#{amount},#{price})
+	</insert>
+	
+	
+	<select id="getOrderList" parameterType="OrderPager" resultType="OrderDTO">	
+		select * from
+		(select rownum as r, o.* from
+		(select * from ordersum 		
+		<choose>
+			<when test="memberId!=null">
+				where memberId=#{memberId}
+				<if test="status!=null">
+					and status=#{status}
+				</if>
+			</when>		
+			<otherwise>
+				<if test="status!=null">
+					where  status=#{status}
+				</if>
+			</otherwise>
+		</choose>
+		 order by regDate desc)o)
+		where r between  #{startRow} and #{lastRow}
+	</select>
+	
+	<select id="getOrderDetailList" resultType="ProductDTO" parameterType="OrderDTO">
+		select p.name,p.imgName
+		from orderdetail o inner join product p
+		on (o.productnum=p.num)
+		where o.ordernum=#{num}
+		
+	</select>
+	
+	<select id="getOrderCount" resultType="Long" parameterType="OrderPager">
+		select count(num) from ordersum
+		<choose>
+			<when test="memberId!=null">
+				where memberId=#{memberId}
+				<if test="status!=null">
+					and status=#{status}
+				</if>
+			</when>
+			
+			<otherwise>
+				<if test="status!=null">
+					where  status=#{status}
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getOrderSelect"  resultMap="getSelectResult" parameterType="OrderDTO">
+		select s.* ,d.*,p.name, p.imgname
+		from ordersum s inner join orderdetail d 
+		on(s.num= d.ordernum)
+		inner join product p
+		on(d.productNum=p.num)
+		where s.num=#{num}
+	</select>
+	
+	<resultMap type="OrderDTO" id="getSelectResult">
+		<id  column="num" property="num"/>
+		<result column="status" property="status"/>
+		<result column="memberId" property="memberId"/>
+		<result column="takePerson" property="takePerson"/>
+		<result column="takePhone" property="takePhone"/>
+		<result column="takeAddr1" property="takeAddr1"/>
+		<result column="takeAddr2" property="takeAddr2"/>
+		<result column="takeAddr3" property="takeAddr3"/>
+		<result column="totalPrice" property="totalPrice"/>
+		<result column="point" property="point"/>
+		<result column="regdate" property="regdate"/>
+		
+		<collection property="orderDetailDTOs" ofType="OrderDetailDTO" javaType="java.util.List">
+			
+			<result column="productNum" property="productNum" />
+			<result column="color" property="color" />
+			<result column="sizing" property="sizing" />
+			<result column="amount" property="amount" />
+			<result column="price" property="price" />
+			<association property="productDTO" javaType="ProductDTO">			
+				<result column="name" property="name"/>
+				<result column="imgName" property="imgName"/>
+			</association>
+		</collection>
+	</resultMap>
+</mapper>

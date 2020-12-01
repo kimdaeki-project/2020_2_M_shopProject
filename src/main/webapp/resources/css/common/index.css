@@ -1,0 +1,119 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+   *{margin:0; padding:0; font-family: 'Arial', 'Nanum Gothic', sans-serif}
+   
+    /* Section */
+   #section{
+      width: 1300px;
+      height: 4700px;
+      margin: 0 auto;
+     
+   }
+   #slide{
+      width: 1300px;
+      height: 600px;
+      margin-top: 20px;
+   }   
+   .slider > div {
+      width: 1300px;
+      height: 600px;
+      position: absolute;
+   }
+   .bx-wrapper{
+      z-index: 0;
+   }
+   .bx-controls-direction {
+       opacity: 0; 
+   }
+   .bx-controls-direction a {
+       font-size: 0;
+       display: block;
+       width: 50px;
+       height: 50px;
+       position: absolute;
+       top: 50%;
+       z-index: 9999;
+   }
+   .bx-controls-direction .bx-prev:before {
+        content: url("../../resources/images/left.png");
+         margin: 50px 0 0 10px;
+
+   }
+   .bx-controls-direction .bx-next:before {
+         content: url("../../resources/images/right.png");
+         margin: 50px 30px 0 0;
+   }
+   .bx-controls-direction .bx-prev{
+       left: 0;
+       width: 55px;
+      height: 50px;
+      background-color: rgba(0,0,0,0.4);
+       cursor: pointer;
+       border-bottom-right-radius: 50px;
+       border-top-right-radius: 50px;
+       margin: 150px 0 0 110px;
+   }
+   
+   .bx-controls-direction .bx-next{
+       right: 0;
+       width: 55px;
+       height: 50px;
+       background-color: rgba(0,0,0,0.4);
+      cursor: pointer;
+      border-bottom-left-radius: 50px;
+       border-top-left-radius: 50px;
+       margin: 150px 110px 0 0 ;
+    }
+   .bx-prev:hover{
+      background-color: rgba(0,0,0,0.8);
+   }
+   .bx-next:hover{
+      background-color: rgba(0,0,0,0.8);
+   }
+   .bx-pager {
+       width: 120px;
+       right: 110px;
+       top: 803px;
+       position: absolute;
+       z-index: 9999;
+   }
+   .bx-pager div {
+      display: inline-block;
+      position: relative;
+   }
+   
+   .bx-pager div a {
+       display: block;
+       width: 10px;
+       height: 10px;
+       border-radius: 10px;
+       margin: 0 5px 0 7px;
+       font-size: 0;
+       color: transparent;
+       background-color: rgb(236, 237, 232);
+   }
+   
+   .bx-pager div a.active {
+        background: #a7a49f;
+   }
+   
+   #box{
+      width: 1300px;
+      height: 248px;
+      padding-top: 20px;
+      font-size: 40px;
+      text-align: center;
+      line-height: 248px;
+      color: white;
+   }
+   .sc_box{
+      width: 413px;
+      height: 248px;
+      background-color: #dad0c7;
+      float: left;
+   }
+   .box_m{
+      margin: 0 29px 0 1px;
+      
+   }

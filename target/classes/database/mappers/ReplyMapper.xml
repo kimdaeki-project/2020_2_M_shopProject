@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.shop.review.ReplyDAO">
+	<insert id="setReply" parameterType="ReplyDTO">
+		insert into reply values(reply_seq.nextval, #{rNum}, #{reWriter}, #{reContents})
+	</insert>
+	<delete id="setDelete" parameterType="ReplyDTO">
+		delete from reply where replyNum=#{replyNum}
+	</delete>
+	<select id="getOne" parameterType="ReplyDTO" resultType="ReplyDTO">
+		select * from reply where replyNum=#{replyNum}
+	
+	</select>	
+	<update id="setUpdate" parameterType="ReplyDTO">
+		update reply set reContents=#{reContents} where replyNum=#{replyNum}
+	</update>
+</mapper>

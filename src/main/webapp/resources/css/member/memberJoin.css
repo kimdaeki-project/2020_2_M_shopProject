@@ -1,0 +1,83 @@
+@charset "UTF-8";
+<style type="text/css">
+   *{
+      margin: 0;
+      padding: 0;
+      font-family: "맑은 고딕", "Nanum Gothic", Verdana, Dotum, AppleGothic, sans-serif;
+   }
+   .table tr{
+      width: auto;
+      padding: 10px 0 8px 10px;
+      vertical-align: middle;
+      font-size: 13px;
+          font-family: 돋움;
+         color: #2e2e2e;
+   }
+   
+   .agree{
+      border: 1px solid #d7d5d5;
+      background: #fbfafa;
+      padding: 20px 20px 1px 20px;
+      margin-bottom: 60px;
+      font-size: 12px;
+   
+   }
+   
+   .table td{
+      width: 20px;
+      font-size: 12px;
+     
+   }
+   
+   .leftrow{
+      background-color: #fbfafa;
+    
+   }
+   
+   .group{
+      border: 1px solid #d9d9d9;
+   }
+   
+   .tab{
+      margin-top: 50px;
+   }
+   
+   .que{
+      font-size: 12px; color=#202020;
+       line-height: 0.2;
+       
+   }
+   .result{
+   	font-size: 11px;
+   	
+   }
+   
+       .btn:hover{
+        background-color: #D4D8D9;
+        color: white;
+   }
+   
+   .btn{
+     text-align: center;
+     text-decoration: none;
+     font-size: 12px;
+     padding: 14px 18px;
+     border-radius: 2px;
+     letter-spacing: 0px;
+   }
+   
+   .btn-join{
+        border: none;
+     background-color: #6e6e6e;
+     color: white;
+   }
+   
+   .btn-cancel{
+        border: 1px solid #d4d8d9;
+        background-color: white;
+   }
+   .authbtn{
+     border: 1px solid #d4d8d9;
+   	background-color: white;
+   }
+</style>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.shop.review.ReviewDAO">
+
+	<insert id="setInsert" parameterType="ReviewDTO">
+		insert into review values(review_seq.nextval, #{writer}, #{contents}, 0, #{star}, #{pnum})
+	</insert>
+	<select id="pageList" parameterType="ReviewPager" resultType="ReviewDTO">
+		select * from review where writer= #{memberId}
+	</select>
+
+
+	<select id="getList" parameterType="ReviewPager" resultMap="getReviewResult">
+	select p.*, c.replyNum,c.rewriter, c.recontents
+    from
+	(select * from
+		(select rownum R, v.* from 
+		(select * from review 
+        where pnum=#{pnum} 
+        order by num desc)v)
+        where R between #{startRow} and #{lastRow}) p left join reply c
+        on (p.num=c.rnum)
+        order by p.num desc
+	</select>
+	
+	<resultMap type="ReviewDTO" id="getReviewResult">
+		<id column="num" property="num"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="star" property="star"/>
+		<collection property="replyDTOs" ofType="ReplyDTO" javaType="java.util.List">
+			<id column="replyNum" property="replyNum"/>
+			<result column="reWriter" property="reWriter"/>
+			<result column="reContents" property="reContents"/>		
+			
+		</collection>
+	</resultMap>
+
+	<select id="getCount" resultType="Long" parameterType="ReviewPager">
+		select count(num) from review where pnum=#{pnum}
+	</select>
+</mapper>

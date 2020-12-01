@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+  	<typeAliases>
+  		<typeAlias type="com.project.shop.member.MemberDTO" alias="MemberDTO"/>
+  		<typeAlias type="com.project.shop.member.MemberPageDTO" alias="MemberPageDTO"/>
+  		<typeAlias type="com.project.shop.product.ProductDTO" alias="ProductDTO"/>
+  		<typeAlias type="com.project.shop.product.CategoryDTO" alias="CategoryDTO"/>
+  		<typeAlias type="java.lang.Long" alias="Long"/>
+  		<typeAlias type="com.project.shop.util.ProductPager" alias="ProductPager"/>
+  		<typeAlias type="com.project.shop.cart.CartDTO" alias="CartDTO"/>
+  		<typeAlias type="com.project.shop.order.OrderDTO" alias="OrderDTO"/>
+  		<typeAlias type="com.project.shop.order.OrderDetailDTO" alias="OrderDetailDTO"/>
+  		<typeAlias type="com.project.shop.util.OrderPager" alias="OrderPager"/>
+  		
+  		
+  		
+  		<typeAlias type="com.project.shop.board.BoardDTO" alias="BoardDTO"/>
+  		<typeAlias type="com.project.shop.board.file.BoardFileDTO" alias="BoardFileDTO"/>
+  		<typeAlias type="com.project.shop.board.notice.NoticeDTO" alias="NoticeDTO"/>
+  		<typeAlias type="com.project.shop.util.Pager" alias="Pager"/>
+  		<typeAlias type="com.project.shop.board.qna.QnaDTO" alias="QnaDTO"/>
+  		
+  		<typeAlias type="com.project.shop.admin.Top5DTO" alias="Top5DTO"/>
+  		
+  			<typeAlias type="com.project.shop.review.ReviewDTO" alias="ReviewDTO"/>
+  		<typeAlias type="com.project.shop.review.ReplyDTO" alias="ReplyDTO"/>
+  		<typeAlias type="com.project.shop.util.ReviewPager" alias="ReviewPager"/>
+  		
+  		 
+  	</typeAliases>
+  </configuration>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.shop.admin.AdminDAO">
+	<update id="setSlideSeqUpdate" parameterType="Top5DTO">
+		update slide set seq=#{seq} where num=#{num}
+	</update>
+	<delete id="setSlideDelete" parameterType="Top5DTO">
+		delete from slide where num=#{num}	
+	</delete>
+
+	<select id="getSlideList" resultType="Top5DTO">
+		select * from slide order by  seq asc ,num desc
+	</select>	
+	
+	<insert id="setSlideInsert" parameterType="Top5DTO">
+		insert into slide values(slide_seq.nextval, #{imgName},0)
+	</insert>
+
+	<select id="getTop5List" resultType="Top5DTO"
+		parameterType="Top5DTO">
+		select o.TOTAL,o.counter,o.productnum, p.name
+		from
+		(select * from	
+		(select sum(price) total, sum(amount) counter,productnum
+		from orderdetail
+		inner join ordersum
+		on (ordersum.num=orderdetail.ordernum)
+		where TO_CHAR(ordersum.regdate,'yyyymmddhh24miss') 
+		between TO_CHAR(#{startDate},'yyyymmdd') || '000000' 
+		and TO_CHAR(#{endDate},'yyyymmdd') || '235959'
+		group by productnum order by total desc)
+		where rownum between 1 and 5) o 
+		inner join product p
+		on (o.productnum=p.num)
+	</select>
+	
+	<select id="getTodayInfo" resultType="Top5DTO">
+		select sum(totalprice) todayTotal,count(num) todayCount 
+		from ordersum
+		where TO_CHAR(REGDATE,'yyyymmddhh24miss')
+		BETWEEN TO_CHAR(sysdate, 'yyyymmdd') || '000000'
+        AND TO_CHAR(sysdate, 'yyyymmddhh24miss')
+	</select>
+	
+	<select id="getDayTotal" resultType="Top5DTO" parameterType="Top5DTO">
+		select sum(totalprice) dayPrice from ordersum
+		where TO_CHAR(REGDATE,'yyyymmddhh24miss') BETWEEN TO_CHAR(sysdate-#{day}, 'yyyymmdd') || '000000'
+        AND TO_CHAR(sysdate-#{day},  'yyyymmdd') || '235959'
+	</select>
+	
+	<select id="getTodayDate" resultType="Top5DTO">
+		select to_char(sysdate,'MM"월"DD"일"HH24"시"mi"분"') todayDate from dual
+	</select>
+	
+	<select id="getMemberList" resultType="MemberDTO" parameterType="OrderPager">
+		select * from
+		(select rownum r, m.* from
+		(select * from member 
+		where auth=0
+		<if test="memberId!=null">
+		  and id like '%'||#{memberId}||'%'
+		</if>
+		 order by regdate desc)m)
+		where r between #{startRow} and #{lastRow}
+	</select>
+	
+	<select id="getMemberCount" parameterType="OrderPager" resultType="Long">
+		select count(*) from member
+		<if test="memberId!=null">
+		where id like '%'||#{memberId}||'%'
+		</if>
+	</select>
+	
+</mapper>

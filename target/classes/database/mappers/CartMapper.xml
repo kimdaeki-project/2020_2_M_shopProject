@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.shop.cart.CartDAO">
+	
+	<delete id="setAllDelete" parameterType="CartDTO">
+		delete from cart where memberId=#{memberId}
+	</delete>
+	
+	<insert id="setInsert" parameterType="CartDTO">
+		insert into cart values(cart_seq.nextval,#{memberId},#{productNum},#{color},#{sizing},#{amount},sysdate)
+	</insert>
+	
+	<select id="getCheck" parameterType="CartDTO" resultType="CartDTO">
+	 select * from cart where memberId=#{memberId} and productNum=#{productNum} and color=#{color} and sizing=#{sizing}
+	</select>
+	
+	<update id="setAmountUpdate">
+	 update cart set amount=amount+#{amount} where memberId=#{memberId} and productNum=#{productNum} and color=#{color} and sizing=#{sizing}
+	</update>
+	
+	<select id="getList" parameterType="CartDTO" resultMap="getListResult">
+		select c.*,p.*
+		from cart c inner join product p
+		on(c.productNum=p.num)
+		where c.memberId=#{memberId}
+		order by c.num desc
+	</select>
+	
+	<resultMap type="CartDTO" id="getListResult">
+		<id column="num" property="num"/>
+		<result column="memberId" property="memberId"/>
+		<result column="productNum" property="productNum"/>
+		<result column="color" property="color"/>
+		<result column="sizing" property="sizing"/>
+		<result column="amount" property="amount"/>
+		<result column="regDate" property="regDate"/>
+		<result column="productNum" property="productNum"/>
+		
+		<association property="productDTO" javaType="ProductDTO">
+			<result column="name" property="name"/>
+			<result column="price" property="price"/>
+			<result column="sale" property="sale"/>
+			<result column="imgName" property="imgName"/>
+		</association>
+	</resultMap>
+	
+	<delete id="setDelete" parameterType="CartDTO">
+		delete from cart where num=#{num}
+	</delete>
+	
+	<update id="setUpdate" parameterType="CartDTO">
+		update cart set amount =#{amount} where num=#{num}
+	</update>
+	
+</mapper>

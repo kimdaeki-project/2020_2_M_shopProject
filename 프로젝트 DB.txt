@@ -1,0 +1,341 @@
+회원테이블
+create table member(
+id varchar2(200),
+pw varchar2(200) not null,
+name varchar2(200) not null,
+addr1 varchar2(200) not null,
+addr2 varchar2(200) not null,
+addr3 varchar2(200) not null,
+phone varchar2(400) not null,
+email varchar2(200) not null,
+point number not null,
+regDate DATE not null,
+auth number(1) not null,
+constraint member_id_pk primary key(id),
+constraint member_auth_ck check (auth in(0,1))
+);
+
+회원데이터
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('lhw751','Ss145252','이현욱','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴','01053066824','lhw751@naver.com',164359,to_date('20/11/04','RR/MM/DD'),0);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('ruler751','Ss145252','길경빈','01849','서울 노원구 공릉로 95 (공릉동)','진우아파트123','01011111111','lhw751@naver.com',243987,to_date('20/11/13','RR/MM/DD'),0);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('tnqls123','Hyun3915','현수빈','07811','서울 강서구 마곡중앙로 36 (마곡동, 마곡엠밸리15단지)','1동2호','01068773915','soonsoon123@naver.com',2000,to_date('20/11/25','RR/MM/DD'),0);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('admin1','admin1','admin1','admin1','admin1','admin1','0101234578','admin1',5420,to_date('20/11/03','RR/MM/DD'),1);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('dlgusdnr123','Ss145252','현수빈','06097','서울 강남구 봉은사로 403 (삼성동)','빌딩123','01068773915','lhw751@naver.com',789232,to_date('20/11/03','RR/MM/DD'),0);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('hyun3915','Hyun3915','현수빈','07811','서울 강서구 마곡중앙로 36 (마곡동, 마곡엠밸리15단지)','1508동','01068773915','soonsoon123@naver.com',2000,to_date('20/11/25','RR/MM/DD'),0);
+Insert into SHOPPROJECT.MEMBER (ID,PW,NAME,ADDR1,ADDR2,ADDR3,PHONE,EMAIL,POINT,REGDATE,AUTH) values ('dlgusdnr751','Ss145252','윤진우','01849','서울 노원구 공릉로 95 (공릉동)','진우아파트111','01011111111','lhw751@naver.com',34536,to_date('20/11/17','RR/MM/DD'),0);
+
+상품테이블
+create table product (
+num number,
+name varchar2(200),
+price number,
+introduce varchar2(4000),
+sale number(3),
+imgName varchar2(200),
+pCode number(3),
+cCode number(3),
+hit number,
+regDate DATE,
+constraint product_num_pk primary key(num)
+);
+
+상품번호 시퀀스
+CREATE SEQUENCE product_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+상품데이터
+Insert into SHOPPROJECT.PRODUCT (NUM,NAME,PRICE,INTRODUCE,SALE,IMGNAME,PCODE,CCODE,HIT,REGDATE) values (718,'티셔츠Test19',15219,'티셔츠설명Test19',5,'1604416579165_tee1.jpg',1,12,0,to_date('20/11/04','RR/MM/DD'));
+Insert into SHOPPROJECT.PRODUCT (NUM,NAME,PRICE,INTRODUCE,SALE,IMGNAME,PCODE,CCODE,HIT,REGDATE) values (719,'티셔츠Test20',15220,'티셔츠설명Test20',5,'1604416579165_tee1.jpg',1,12,0,to_date('20/11/04','RR/MM/DD'));
+Insert into SHOPPROJECT.PRODUCT (NUM,NAME,PRICE,INTRODUCE,SALE,IMGNAME,PCODE,CCODE,HIT,REGDATE) values (720,'티셔츠Test21',15221,'티셔츠설명Test21',5,'1604416579165_tee1.jpg',1,12,0,to_date('20/11/04','RR/MM/DD'));
+Insert into SHOPPROJECT.PRODUCT (NUM,NAME,PRICE,INTRODUCE,SALE,IMGNAME,PCODE,CCODE,HIT,REGDATE) values (721,'티셔츠Test22',15222,'티셔츠설명Test22',5,'1604416579165_tee1.jpg',1,12,0,to_date('20/11/04','RR/MM/DD'));
+Insert into SHOPPROJECT.PRODUCT (NUM,NAME,PRICE,INTRODUCE,SALE,IMGNAME,PCODE,CCODE,HIT,REGDATE) values (722,'티셔츠Test23',15223,'티셔츠설명Test23',5,'1604416579165_tee1.jpg',1,12,0,to_date('20/11/04','RR/MM/DD'));
+
+카테고리테이블
+create table category(
+pCode number(3),
+cCode number(3),
+name  varchar2(100)
+);
+
+
+카테고리 데이터
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,0,'TOP');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,11,'KNIT');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,12,'TEE');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,13,'맨투맨&후드');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,14,'BLOUSE');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (1,15,'SHIRT');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (2,0,'PANTS');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (2,21,'슬림&일자');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (2,22,'와이드');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (2,23,'슬랙스');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (2,24,'반바지');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (3,0,'OUTER');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (3,31,'CARDIGAN');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (3,32,'JUMPER');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (3,33,'COAT');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (3,34,'JACKET');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (4,0,'DRESS&SKIRT');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (4,41,'SKIRT');
+Insert into SHOPPROJECT.CATEGORY (PCODE,CCODE,NAME) values (4,42,'DRESS');
+
+장바구니테이블
+create table cart(
+num number,
+memberId varchar2(200),
+productNum number,
+color varchar2(100),
+sizing varchar2(100),
+amount number(3),
+regDate date,
+constraint cart_num_pk primary key(num),
+constraint cart_memberId_fk foreign key(memberId) references member(id) on delete cascade,
+constraint cart_productNum_fk foreign key(productNum) references product(num) on delete cascade 
+);
+
+장바구니시퀀스
+CREATE SEQUENCE cart_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+
+장바구니 데이터
+Insert into SHOPPROJECT.CART (NUM,MEMBERID,PRODUCTNUM,COLOR,SIZING,AMOUNT,REGDATE) values (247,'lhw751',1285,'Black','S',1,to_date('20/11/30','RR/MM/DD'));
+Insert into SHOPPROJECT.CART (NUM,MEMBERID,PRODUCTNUM,COLOR,SIZING,AMOUNT,REGDATE) values (159,'dlgusdnr751',981,'Black','S',1,to_date('20/11/17','RR/MM/DD'));
+
+
+주문종합테이블
+create table orderSum(
+num varchar2(200),
+memberId varchar2(200),
+takePerson varchar2(200),
+takePhone varchar2(200),
+takeAddr1 varchar2(200),
+takeAddr2 varchar2(200),
+takeAddr3 varchar2(200),
+totalPrice number,
+point number,
+status varchar2(100),
+regdate date,
+constraint order_pk_num primary key(num),
+constraint order_fk_memberId foreign key(memberId) references member(id) on delete cascade
+);
+
+주문종합데이터
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_236944561980','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',24426,0,'결제완료',to_date('20/11/10','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_570971025654','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',41979,0,'결제완료',to_date('20/11/10','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_998998548637','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',40850,0,'결제완료',to_date('20/11/10','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_873026409976','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',40850,0,'결제완료',to_date('20/11/10','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_879109605137','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',33378,0,'결제완료',to_date('20/11/10','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_488218856216','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',418300,1500,'결제완료',to_date('20/11/11','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_493265073590','dlgusdnr123','이현욱','01011111111','06097','서울 강남구 봉은사로 403 (삼성동)','빌딩123',244270,0,'결제완료',to_date('20/11/11','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_934002314077','lhw751','이현욱','01033445566','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',204250,0,'배송시작',to_date('20/11/12','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_944841697587','ruler751','윤진우','01022222222','01849','서울 노원구 공릉로 95 (공릉동)','진우아파트123',34200,0,'결제완료',to_date('20/11/13','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_604632406178','dlgusdnr123','이현욱','01011111111','06097','서울 강남구 봉은사로 403 (삼성동)','빌딩123',37810,0,'결제완료',to_date('20/11/13','RR/MM/DD'));
+Insert into SHOPPROJECT.ORDERSUM (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,TOTALPRICE,POINT,STATUS,REGDATE) values ('imp_410693077402','dlgusdnr123','이현욱','01011111111','06097','서울 강남구 봉은사로 403 (삼성동)','빌딩123',40850,0,'배송준비중',to_date('20/11/13','RR/MM/DD'));
+
+주문상품테이블
+create table orderDetail(
+num number,
+orderNum varchar2(200),
+productNum number,
+color varchar2(100),
+sizing varchar2(100),
+amount number(3),
+price number,
+constraint orderDetail_pk_num primary key(num),
+constraint orderDetail_fk_orderNum foreign key(orderNum) references orderSum(num) on delete cascade,
+constraint orderDetail_fk_productNum foreign key(productNum) references product(num) on delete cascade
+);
+
+주문상품시퀀스
+CREATE SEQUENCE orderDetail_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+
+주문상품데이터
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (80,'imp_236944561980',1123,'Black','S',1,24426);
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (81,'imp_570971025654',980,'Black','S',1,41979);
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (82,'imp_998998548637',1273,'Black','S',1,40850);
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (83,'imp_873026409976',1269,'Black','S',1,40850);
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (84,'imp_879109605137',692,'Black','S',1,33378);
+Insert into SHOPPROJECT.ORDERDETAIL (NUM,ORDERNUM,PRODUCTNUM,COLOR,SIZING,AMOUNT,PRICE) values (90,'imp_488218856216',981,'White','S',10,419800);
+
+배송지테이블
+create table dest(
+num number,
+memberId varchar2(200),
+takePerson varchar2(200),
+takePhone varchar2(200),
+takeAddr1 varchar2(200),
+takeAddr2 varchar2(200),
+takeAddr3 varchar2(200),
+constraint dest_pk_num primary key(num),
+constraint dest_fk_memberId foreign key(memberId) references Member(id)
+);
+
+배송지시퀀스
+CREATE SEQUENCE dest_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+배송지데이터
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (54,'lhw751','장승혁','01054535941','경기 의정부시 가금로 29 (가능동)','경기 의정부시 가금로 29 (가능동)','승집',1);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (37,'dlgusdnr123','현병훈','01012356891','서울 강서구 강서로 375 (마곡동)','서울 강서구 강서로 375 (마곡동)','수빈이네집',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (10,'dlgusdnr751','윤진우','01011111111','01849','서울 노원구 공릉로 95 (공릉동)','진우아파트111',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (45,'tnqls123','현수빈','01068773915','07811','서울 강서구 마곡중앙로 36 (마곡동, 마곡엠밸리15단지)','1동2호',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (53,'lhw751','이현욱','01053066824','06153','서울 강남구 봉은사로 404 (삼성동)','현욱어패럴',1);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (35,'ruler751','길경빈','01011111111','01849','서울 노원구 공릉로 95 (공릉동)','진우아파트123',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (43,'tnqls123','윤진우','01051815346','서울 마포구 월드컵북로 21 (서교동)','서울 마포구 월드컵북로 21 (서교동)','2층풍성빌딩',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (36,'dlgusdnr123','현수빈','01068773915','06097','서울 강남구 봉은사로 403 (삼성동)','빌딩123',0);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (41,'lhw751','김선호','01065789421','경기 과천시 뒷골1로 2 (과천동)','경기 과천시 뒷골1로 2 (과천동)','선호아파트',1);
+Insert into SHOPPROJECT.DEST (NUM,MEMBERID,TAKEPERSON,TAKEPHONE,TAKEADDR1,TAKEADDR2,TAKEADDR3,FIX) values (51,'lhw751','조창일','01034322352','경기 용인시 수지구 경부고속도로 400 (죽전동)','경기 용인시 수지구 경부고속도로 400 (죽전동)','창일홈',1);
+
+공지게시판테이블
+create table notice(
+num number CONSTRAINT notice_num_pk primary key,
+title VARCHAR2(200) not null,
+writer VARCHAR2(200) CONSTRAINT notice_writer_fk REFERENCES member(id),
+contents VARCHAR2(4000) not null,
+regDate DATE not null, 
+hit number
+);
+
+공지게시판시퀀스
+CREATE SEQUENCE notice_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+공지게시판데이터
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (2,'TITLE1','admin1','CONTENTS1',to_date('20/11/10','RR/MM/DD'),0);
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (3,'TITLE2','admin1','CONTENTS2',to_date('20/11/10','RR/MM/DD'),0);
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (4,'TITLE3','admin1','CONTENTS3',to_date('20/11/10','RR/MM/DD'),0);
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (5,'TITLE4','admin1','CONTENTS4',to_date('20/11/10','RR/MM/DD'),0);
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (6,'TITLE5','admin1','CONTENTS5',to_date('20/11/10','RR/MM/DD'),0);
+Insert into SHOPPROJECT.NOTICE (NUM,TITLE,WRITER,CONTENTS,REGDATE,HIT) values (7,'TITLE6','admin1','CONTENTS6',to_date('20/11/10','RR/MM/DD'),0);
+
+
+문의게시판테이블
+create table qna(
+    num number,
+   title VARCHAR2(200) not null, 
+   writer VARCHAR2(200) not null constraint qna_writer_fk REFERENCES member (id), 
+   contents VARCHAR2(4000) not null,
+    qnaPw number not null,
+   regDate DATE not null, 
+   hit NUMBER,
+   ref NUMBER,
+   depth NUMBER,
+    constraint qna_num_pk primary key(num)
+);
+
+문의게시판시퀀스
+CREATE SEQUENCE qna_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+문의게시판데이터
+Insert into SHOPPROJECT.QNA (NUM,TITLE,WRITER,CONTENTS,QNAPW,REGDATE,HIT,REF,DEPTH,EMAIL) values (1,'상품 문의 d','lhw751','※이미 처리된 게시글의 답글은 확인이 어려울 수 있으니 재문의는 꼭 새 게시글 작성으로 부탁드립니다!<br><br>주문번호: testd<br>성함: 이현욱d<br>연락처: 0101111111d<br>문의해주실 상품명: testd',1234,to_date('20/11/11','RR/MM/DD'),0,1,0,'aaa123@naver.com');
+Insert into SHOPPROJECT.QNA (NUM,TITLE,WRITER,CONTENTS,QNAPW,REGDATE,HIT,REF,DEPTH,EMAIL) values (2,'test','admin1','※이미 처리된 게시글의 답글은 확인이 어려울 수 있으니 재문의는 꼭 새 게시글 작성으로 부탁드립니다!<br>test',1234,to_date('20/11/11','RR/MM/DD'),0,1,1,'aaa123@naver.com');
+Insert into SHOPPROJECT.QNA (NUM,TITLE,WRITER,CONTENTS,QNAPW,REGDATE,HIT,REF,DEPTH,EMAIL) values (4,'상품 문의','dlgusdnr123','※이미 처리된 게시글의 답글은 확인이 어려울 수 있으니 재문의는 꼭 새 게시글 작성으로 부탁드립니다!<br><br>주문번호:te<br>성함:te<br>연락처:te<br>문의해주실 상품명:te',1234,to_date('20/11/11','RR/MM/DD'),0,4,0,'aaa123@naver.com');
+Insert into SHOPPROJECT.QNA (NUM,TITLE,WRITER,CONTENTS,QNAPW,REGDATE,HIT,REF,DEPTH,EMAIL) values (5,'상품 문의','dlgusdnr123','※이미 처리된 게시글의 답글은 확인이 어려울 수 있으니 재문의는 꼭 새 게시글 작성으로 부탁드립니다!<br><br>주문번호:te<br>성함:te<br>연락처:te<br>문의해주실 상품명:te',1234,to_date('20/11/11','RR/MM/DD'),0,5,0,'aaa123@naver.com');
+Insert into SHOPPROJECT.QNA (NUM,TITLE,WRITER,CONTENTS,QNAPW,REGDATE,HIT,REF,DEPTH,EMAIL) values (7,'상품 문의','dlgusdnr123','※이미 처리된 게시글의 답글은 확인이 어려울 수 있으니 재문의는 꼭 새 게시글 작성으로 부탁드립니다!<br><br>주문번호:test<br>성함:test<br>연락처:test<br>문의해주실 상품명:stest',1234,to_date('20/11/11','RR/MM/DD'),0,7,0,'aaa123@naver.com');
+
+메인슬라이드테이블
+create table slide(
+num number,
+imgName varchar2(200),
+constraint slide_pk_num primary key(num)
+);
+
+메인슬라이드시퀀스
+CREATE SEQUENCE slide_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+메인슬라이드데이터
+Insert into SHOPPROJECT.SLIDE (NUM,IMGNAME,SEQ) values (49,'1606721646604_slide4.jpg',2);
+Insert into SHOPPROJECT.SLIDE (NUM,IMGNAME,SEQ) values (48,'1606721641138_slide1.jpg',3);
+Insert into SHOPPROJECT.SLIDE (NUM,IMGNAME,SEQ) values (50,'1606721651476_slide6.jpg',1);
+Insert into SHOPPROJECT.SLIDE (NUM,IMGNAME,SEQ) values (51,'1606721656333_slide3.jpg',5);
+Insert into SHOPPROJECT.SLIDE (NUM,IMGNAME,SEQ) values (53,'1606725510807_slide2.jpg',4);
+
+리뷰테이블
+CREATE TABLE REVIEW (
+   NUM NUMBER constraint review_num_pk primary key,
+   WRITER VARCHAR2(200) constraint review_writer_fk references member(id), 
+   CONTENTS VARCHAR2(4000), 
+   RECOMMEND NUMBER(5,0), 
+   STAR NUMBER(1,0), 
+   PNUM NUMBER constraint review_pnum_fk references product(num)
+   );
+
+리뷰시퀀스
+CREATE SEQUENCE review_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+리뷰데이터
+Insert into SHOPPROJECT.REVIEW (NUM,WRITER,CONTENTS,RECOMMEND,STAR,PNUM) values (1,'lhw751','<p><img src="../resources/upload/review/1606107778994_list6.jpg" style="width: 25%;"></p><p><br></p><p>정말 착용감이 좋았습니다!!!! 다음에 또살게요</p>',0,5,1269);
+Insert into SHOPPROJECT.REVIEW (NUM,WRITER,CONTENTS,RECOMMEND,STAR,PNUM) values (2,'lhw751','마음에 들었습니다 재구매 의향있어요!',0,4,1269);
+Insert into SHOPPROJECT.REVIEW (NUM,WRITER,CONTENTS,RECOMMEND,STAR,PNUM) values (3,'ruler751','이쁜거같아요 &gt;&lt;',0,3,1269);
+Insert into SHOPPROJECT.REVIEW (NUM,WRITER,CONTENTS,RECOMMEND,STAR,PNUM) values (4,'ruler751','2번째 사는건데 이것만 입어요',0,5,1269);
+
+리뷰답글테이블
+create table reply(
+    replynum number not null CONSTRAINT reply_num_pk primary key,
+    rnum number not null constraint reply_num_fk REFERENCES review(num) on DELETE CASCADE,
+   rewriter VARCHAR2(200)constraint reply_rewriter_fk references member(id), 
+   recontents VARCHAR2(4000) not null
+);  
+
+리뷰답글시퀀스
+CREATE SEQUENCE reply_seq
+START WITH 1
+INCREMENT BY 1
+NOMAXVALUE
+NOMINVALUE
+NOCYCLE
+NOCACHE;
+
+
+리뷰답글데이터
+Insert into SHOPPROJECT.REPLY (REPLYNUM,RNUM,REWRITER,RECONTENTS) values (12,4,'tnqls123','저도요!!');
+Insert into SHOPPROJECT.REPLY (REPLYNUM,RNUM,REWRITER,RECONTENTS) values (15,14,'ruler751','혹시 신체 스펙이 어떻게 되시나용!!');
+Insert into SHOPPROJECT.REPLY (REPLYNUM,RNUM,REWRITER,RECONTENTS) values (10,6,'dlgusdnr123','good');
+Insert into SHOPPROJECT.REPLY (REPLYNUM,RNUM,REWRITER,RECONTENTS) values (11,11,'tnqls123','좋아요!!');
+Insert into SHOPPROJECT.REPLY (REPLYNUM,RNUM,REWRITER,RECONTENTS) values (13,6,'tnqls123','그러게요~~~너무좋아요~~');

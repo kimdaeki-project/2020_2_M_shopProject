@@ -6,4 +6,4 @@
 프로젝트 : Middle Project 5조
 Branch   : main
 
-# 2020_2_M_shopProject
+# shopProject
